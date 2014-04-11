@@ -26,10 +26,10 @@ classdef transImage
         end
         
         function ti = finalize (ti, filename)
-            ti.aft = uint8 (idwt2 (ti.LL, ti.LH, ti.HL, ti.HH, ti.wname, ti.sz));
+            ti.aft = idwt2 (ti.LL, ti.LH, ti.HL, ti.HH, ti.wname, ti.sz);
             [ti.psnr, ti.mse, ti.maxerr, ti.l2rad] = measerr (ti.aft, ti.bef);
             if nargin == 2
-                imwrite (ti.aft, filename);
+                imwrite (uint8(ti.aft), filename, 'Quality', 100);
             end
         end
         
