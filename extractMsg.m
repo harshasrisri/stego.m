@@ -12,8 +12,11 @@ for ii = 1:size(obj,1)*size(obj,2)
     
     if mod(ii,8) == 0
         msgChar = bin2dec(msgbits);
+        if msgChar == 0
+            break;
+        end
         msgChar = char (msgChar);
-        message = strcat (message, msgChar);
+        message = [message msgChar]; %#ok<AGROW>
         msgbits = '';
     end
 end
