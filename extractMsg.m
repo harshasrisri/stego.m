@@ -1,7 +1,7 @@
 function message = extractMsg (obj)
 message = '';
+msgbits = '';
 for ii = 1:size(obj,1)*size(obj,2)
-    msgbits = '';
     if obj(ii) > 0
         msgbits = strcat (msgbits, '1');
     elseif obj(ii) < 0
@@ -9,8 +9,12 @@ for ii = 1:size(obj,1)*size(obj,2)
     else
         return;
     end
-    if mod(ii,8) == 1
-        message = strcat (message, char (bin2dec(msgbits)));
+    
+    if mod(ii,8) == 0
+        msgChar = bin2dec(msgbits);
+        msgChar = char (msgChar);
+        message = strcat (message, msgChar);
+        msgbits = '';
     end
 end
 end
